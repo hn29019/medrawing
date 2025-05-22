@@ -3,21 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Drawing Studio</title>
+    <title>HyperStudio Pro - Advanced Digital Art Platform</title>
     <style>
+        /* Core Theme System */
         :root {
-            --primary-color: #2196F3;
-            --secondary-color: #1976D2;
-            --background-color: #f5f5f5;
-            --text-color: #333;
-            --border-radius: 8px;
+            /* Dynamic Color System */
+            --primary-h: 150;
+            --primary-s: 50%;
+            --primary-l: 50%;
+            --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+            --primary-dark: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 20%));
+            --primary-light: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) + 20%));
+
+            /* Advanced Gradient System */
+            --gradient-metallic: linear-gradient(
+                45deg,
+                hsl(0, 0%, 90%) 0%,
+                hsl(0, 0%, 80%) 20%,
+                hsl(0, 0%, 95%) 40%,
+                hsl(0, 0%, 85%) 60%,
+                hsl(0, 0%, 90%) 80%,
+                hsl(0, 0%, 80%) 100%
+            );
+            
+            /* Neural Theme Colors */
+            --neural-1: #2A2F3E;
+            --neural-2: #1F2430;
+            --neural-3: #171C28;
+            
+            /* Advanced Shadow System */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1),
+                        0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1),
+                        0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1),
+                        0 4px 6px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1),
+                        0 10px 10px rgba(0,0,0,0.04);
+            
+            /* Glassmorphism Effects */
+            --glass-1: rgba(255, 255, 255, 0.1);
+            --glass-2: rgba(255, 255, 255, 0.05);
+            --glass-blur: blur(10px);
+            
+            /* Advanced Animation Timing */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Spacing System */
+            --space-unit: 4px;
+            --space-xs: calc(var(--space-unit) * 1);
+            --space-sm: calc(var(--space-unit) * 2);
+            --space-md: calc(var(--space-unit) * 4);
+            --space-lg: calc(var(--space-unit) * 6);
+            --space-xl: calc(var(--space-unit) * 8);
         }
 
-        body {
+        /* Advanced Reset */
+        *, *::before, *::after {
             margin: 0;
-            padding: 20px;
-            background: var(--background-color);
-            font-family: 'Segoe UI', sans-serif;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Enhanced Body Styles */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--neural-3);
+            color: #fff;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            grid-template-rows: auto 1fr auto;
+            gap: var(--space-md);
+        }
+
+        /* Advanced Canvas System */
+        .canvas-workspace {
+            position: relative;
+            grid-column: 2;
+            grid-row: 2;
+            overflow: hidden;
+            background: 
+                linear-gradient(45deg, var(--neural-2) 25%, transparent 25%),
+                linear-gradient(-45deg, var(--neural-2) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, var(--neural-2) 75%),
+                linear-gradient(-45deg, transparent 75%, var(--neural-2) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .canvas-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: var(--shadow-xl);
+            border-radius: 8px;
             overflow: hidden;
         }
 
@@ -25,187 +113,101 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
         }
 
-        .toolbox {
+        /* Advanced Toolbar System */
+        .toolbar {
             position: fixed;
-            left: 20px;
-            top: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            display: flex;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            background: var(--neural-2);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: var(--glass-blur);
             z-index: 1000;
-            transition: 0.3s;
-            max-height: 50px;
+            transition: var(--transition-normal);
+        }
+
+        .toolbar-top {
+            top: var(--space-md);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .toolbar-left {
+            left: var(--space-md);
+            top: 50%;
+            transform: translateY(-50%);
+            flex-direction: column;
+        }
+
+        .toolbar-right {
+            right: var(--space-md);
+            top: 50%;
+            transform: translateY(-50%);
+            flex-direction: column;
+        }
+
+        /* Enhanced Tool Buttons */
+        .tool-button {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: var(--glass-1);
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: var(--transition-fast);
+            position: relative;
             overflow: hidden;
         }
 
-        .toolbox.expanded {
-            max-height: 800px;
+        .tool-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: var(--transition-fast);
         }
 
-        .toolbox-header {
+        .tool-button:hover::before {
+            transform: translateX(100%);
+        }
+
+        .tool-button:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .tool-button.active {
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        /* Advanced Panel System */
+        .panel {
+            background: var(--neural-2);
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            backdrop-filter: var(--glass-blur);
+            padding: var(--space-md);
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            cursor: pointer;
+            flex-direction: column;
+            gap: var(--space-md);
+            max-height: 80vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
         }
-
-        .tools-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .tool-section {
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .tool-section h3 {
-            margin: 0 0 10px 0;
-            font-size: 14px;
-            color: #666;
-        }
-
-        button {
-            padding: 8px 12px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        button:hover {
-            background: var(--secondary-color);
-        }
-
-        .control-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        input[type="range"] {
-            flex: 1;
-        }
-
-        input[type="color"] {
-            width: 40px;
-            height: 40px;
-            padding: 0;
-            border: none;
-        }
-
-        .shapes-panel {
-            position: fixed;
-            right: 20px;
-            top: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            display: none;
-        }
-
-        .shapes-panel.visible {
-            display: block;
-        }
-
-        .cursor-position {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            background: rgba(255,255,255,0.9);
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-
-        .animation-controls {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: white;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-    </style>
-</head>
-<body>
-    <canvas id="mainCanvas"></canvas>
-
-    <div class="toolbox" id="toolbox">
-        <div class="toolbox-header" id="toolboxHeader">
-            <h2>Drawing Tools</h2>
-            <span class="expand-icon">▼</span>
-        </div>
-        
-        <div class="tools-container">
-            <div class="tool-section">
-                <h3>Basic Tools</h3>
-                <button id="pencilTool">✏️ Pencil</button>
-                <button id="brushTool">🖌️ Brush</button>
-                <button id="eraserTool">⌫ Eraser</button>
-                <button id="shapesTool">📐 Shapes</button>
-            </div>
-
-            <div class="tool-section">
-                <h3>Colors & Size</h3>
-                <div class="control-group">
-                    <input type="color" id="colorPicker" value="#000000">
-                    <input type="range" id="sizeSlider" min="1" max="50" value="5">
-                </div>
-            </div>
-
-            <div class="tool-section">
-                <h3>Actions</h3>
-                <button id="undoBtn">↩️ Undo</button>
-                <button id="redoBtn">↪️ Redo</button>
-                <button id="clearBtn">🗑️ Clear</button>
-                <button id="saveBtn">💾 Save</button>
-            </div>
-
-            <div class="tool-section">
-                <h3>Effects</h3>
-                <button id="smoothBtn">🎨 Smooth</button>
-                <button id="animateBtn">▶️ Animate</button>
-                <button id="moveBtn">✥ Move</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="shapes-panel" id="shapesPanel">
-        <h3>Shapes</h3>
-        <button data-shape="rectangle">⬜ Rectangle</button>
-        <button data-shape="circle">⭕ Circle</button>
-        <button data-shape="triangle">△ Triangle</button>
-        <button data-shape="line">📏 Line</button>
-    </div>
-
-    <div class="animation-controls" id="animationControls" style="display: none;">
-        <button id="playPauseBtn">⏯️</button>
-        <input type="range" id="speedSlider" min="1" max="100" value="50">
-        <span>Speed</span>
-    </div>
-
-    <div class="cursor-position" id="cursorPosition">X: 0, Y: 0</div>
