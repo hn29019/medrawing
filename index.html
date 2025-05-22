@@ -3,100 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HyperStudio Pro - Advanced Digital Art Platform</title>
+    <title>HyperStudio X - Professional Digital Art Platform</title>
+    
+    <!-- Optimized CSS with performance-focused selectors -->
     <style>
-        /* Core Theme System */
+        /* Core System Variables */
         :root {
-            /* Dynamic Color System */
-            --primary-h: 150;
-            --primary-s: 50%;
-            --primary-l: 50%;
-            --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
-            --primary-dark: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 20%));
-            --primary-light: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) + 20%));
-
-            /* Advanced Gradient System */
-            --gradient-metallic: linear-gradient(
-                45deg,
-                hsl(0, 0%, 90%) 0%,
-                hsl(0, 0%, 80%) 20%,
-                hsl(0, 0%, 95%) 40%,
-                hsl(0, 0%, 85%) 60%,
-                hsl(0, 0%, 90%) 80%,
-                hsl(0, 0%, 80%) 100%
-            );
+            /* Performance-optimized color system */
+            --primary: #4CAF50;
+            --secondary: #2196F3;
+            --accent: #FF4081;
+            --success: #00C853;
+            --warning: #FFD600;
+            --error: #FF1744;
+            --surface-1: #1E1E1E;
+            --surface-2: #2D2D2D;
+            --surface-3: #333333;
             
-            /* Neural Theme Colors */
-            --neural-1: #2A2F3E;
-            --neural-2: #1F2430;
-            --neural-3: #171C28;
+            /* Optimized shadow system */
+            --shadow-1: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-2: 0 4px 8px rgba(0,0,0,0.15);
+            --shadow-3: 0 8px 16px rgba(0,0,0,0.2);
             
-            /* Advanced Shadow System */
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1),
-                        0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1),
-                        0 2px 4px rgba(0,0,0,0.06);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1),
-                        0 4px 6px rgba(0,0,0,0.05);
-            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1),
-                        0 10px 10px rgba(0,0,0,0.04);
+            /* Performance-focused spacing */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 16px;
+            --space-4: 24px;
+            --space-5: 32px;
             
-            /* Glassmorphism Effects */
-            --glass-1: rgba(255, 255, 255, 0.1);
-            --glass-2: rgba(255, 255, 255, 0.05);
-            --glass-blur: blur(10px);
-            
-            /* Advanced Animation Timing */
+            /* Optimized transitions */
             --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
             
-            /* Spacing System */
-            --space-unit: 4px;
-            --space-xs: calc(var(--space-unit) * 1);
-            --space-sm: calc(var(--space-unit) * 2);
-            --space-md: calc(var(--space-unit) * 4);
-            --space-lg: calc(var(--space-unit) * 6);
-            --space-xl: calc(var(--space-unit) * 8);
+            /* System dimensions */
+            --toolbar-size: 48px;
+            --panel-width: 300px;
+            --border-radius: 8px;
         }
 
-        /* Advanced Reset */
-        *, *::before, *::after {
+        /* Optimized Reset */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none;
-            -webkit-user-drag: none;
-            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Enhanced Body Styles */
+        /* Performance-focused body setup */
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--neural-3);
-            color: #fff;
+            background: var(--surface-1);
+            color: #FFFFFF;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             overflow: hidden;
             width: 100vw;
             height: 100vh;
             display: grid;
-            grid-template-columns: auto 1fr auto;
+            grid-template-columns: var(--panel-width) 1fr var(--panel-width);
             grid-template-rows: auto 1fr auto;
-            gap: var(--space-md);
+            gap: var(--space-3);
         }
 
-        /* Advanced Canvas System */
+        /* Optimized Canvas System */
         .canvas-workspace {
             position: relative;
             grid-column: 2;
             grid-row: 2;
             overflow: hidden;
-            background: 
-                linear-gradient(45deg, var(--neural-2) 25%, transparent 25%),
-                linear-gradient(-45deg, var(--neural-2) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, var(--neural-2) 75%),
-                linear-gradient(-45deg, transparent 75%, var(--neural-2) 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            background-color: var(--surface-2);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-2);
         }
 
         .canvas-container {
@@ -104,8 +81,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: var(--shadow-xl);
-            border-radius: 8px;
+            box-shadow: var(--shadow-3);
+            border-radius: var(--border-radius);
             overflow: hidden;
         }
 
@@ -113,52 +90,53 @@
             position: absolute;
             top: 0;
             left: 0;
-            image-rendering: pixelated;
-            image-rendering: crisp-edges;
+            touch-action: none;
+            image-rendering: optimizeSpeed;
+            transform-origin: 0 0;
         }
 
-        /* Advanced Toolbar System */
+        /* High-performance Layer System */
+        .layer-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        /* Optimized Toolbar */
         .toolbar {
             position: fixed;
-            display: flex;
-            gap: var(--space-sm);
-            padding: var(--space-sm);
-            background: var(--neural-2);
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
-            backdrop-filter: var(--glass-blur);
+            background: var(--surface-2);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-2);
             z-index: 1000;
+            display: flex;
+            gap: var(--space-2);
+            padding: var(--space-2);
             transition: var(--transition-normal);
         }
 
         .toolbar-top {
-            top: var(--space-md);
+            top: var(--space-3);
             left: 50%;
             transform: translateX(-50%);
         }
 
         .toolbar-left {
-            left: var(--space-md);
+            left: var(--space-3);
             top: 50%;
             transform: translateY(-50%);
             flex-direction: column;
         }
 
-        .toolbar-right {
-            right: var(--space-md);
-            top: 50%;
-            transform: translateY(-50%);
-            flex-direction: column;
-        }
-
-        /* Enhanced Tool Buttons */
+        /* Optimized Tool Buttons */
         .tool-button {
-            width: 48px;
-            height: 48px;
+            width: var(--toolbar-size);
+            height: var(--toolbar-size);
             border: none;
-            border-radius: 12px;
-            background: var(--glass-1);
-            color: #fff;
+            border-radius: var(--border-radius);
+            background: var(--surface-3);
+            color: #FFFFFF;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -169,45 +147,128 @@
             overflow: hidden;
         }
 
-        .tool-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: translateX(-100%);
-            transition: var(--transition-fast);
-        }
-
-        .tool-button:hover::before {
-            transform: translateX(100%);
-        }
-
         .tool-button:hover {
             background: var(--primary);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .tool-button.active {
             background: var(--primary);
-            box-shadow: 0 0 15px var(--primary);
+            box-shadow: 0 0 12px var(--primary);
         }
 
-        /* Advanced Panel System */
+        /* Optimized Panels */
         .panel {
-            background: var(--neural-2);
-            border-radius: 16px;
-            box-shadow: var(--shadow-xl);
-            backdrop-filter: var(--glass-blur);
-            padding: var(--space-md);
+            background: var(--surface-2);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-2);
+            padding: var(--space-3);
             display: flex;
             flex-direction: column;
-            gap: var(--space-md);
-            max-height: 80vh;
+            gap: var(--space-3);
+            height: 100%;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: var(--primary) transparent;
+            scrollbar-color: var(--primary) var(--surface-3);
         }
+
+        .panel-left {
+            grid-column: 1;
+            grid-row: 1 / -1;
+        }
+
+        .panel-right {
+            grid-column: 3;
+            grid-row: 1 / -1;
+        }
+
+        /* Optimized Sliders */
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--surface-3);
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        /* Optimized Color Picker */
+        .color-picker {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-2);
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 2px solid var(--surface-3);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+            border-color: var(--primary);
+        }
+
+        /* Performance-optimized Modal */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--surface-2);
+            padding: var(--space-4);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-3);
+            z-index: 2000;
+            min-width: 400px;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        /* Optimized Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+    </style>
+</head>
