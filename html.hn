@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Drawing Studio</title>
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #1976D2;
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --border-radius: 8px;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background: var(--background-color);
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        #mainCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+        }
+
+        .toolbox {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: 0.3s;
+            max-height: 50px;
+            overflow: hidden;
+        }
+
+        .toolbox.expanded {
+            max-height: 800px;
+        }
+
+        .toolbox-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .tools-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .tool-section {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .tool-section h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        button {
+            padding: 8px 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        button:hover {
+            background: var(--secondary-color);
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+        }
+
+        input[type="color"] {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border: none;
+        }
+
+        .shapes-panel {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .shapes-panel.visible {
+            display: block;
+        }
+
+        .cursor-position {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .animation-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mainCanvas"></canvas>
+
+    <div class="toolbox" id="toolbox">
+        <div class="toolbox-header" id="toolboxHeader">
+            <h2>Drawing Tools</h2>
+            <span class="expand-icon">▼</span>
+        </div>
+        
+        <div class="tools-container">
+            <div class="tool-section">
+                <h3>Basic Tools</h3>
+                <button id="pencilTool">✏️ Pencil</button>
+                <button id="brushTool">🖌️ Brush</button>
+                <button id="eraserTool">⌫ Eraser</button>
+                <button id="shapesTool">📐 Shapes</button>
+            </div>
+
+            <div class="tool-section">
+                <h3>Colors & Size</h3>
+                <div class="control-group">
+                    <input type="color" id="colorPicker" value="#000000">
+                    <input type="range" id="sizeSlider" min="1" max="50" value="5">
+                </div>
+            </div>
+
+            <div class="tool-section">
+                <h3>Actions</h3>
+                <button id="undoBtn">↩️ Undo</button>
+                <button id="redoBtn">↪️ Redo</button>
+                <button id="clearBtn">🗑️ Clear</button>
+                <button id="saveBtn">💾 Save</button>
+            </div>
+
+            <div class="tool-section">
+                <h3>Effects</h3>
+                <button id="smoothBtn">🎨 Smooth</button>
+                <button id="animateBtn">▶️ Animate</button>
+                <button id="moveBtn">✥ Move</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="shapes-panel" id="shapesPanel">
+        <h3>Shapes</h3>
+        <button data-shape="rectangle">⬜ Rectangle</button>
+        <button data-shape="circle">⭕ Circle</button>
+        <button data-shape="triangle">△ Triangle</button>
+        <button data-shape="line">📏 Line</button>
+    </div>
+
+    <div class="animation-controls" id="animationControls" style="display: none;">
+        <button id="playPauseBtn">⏯️</button>
+        <input type="range" id="speedSlider" min="1" max="100" value="50">
+        <span>Speed</span>
+    </div>
+
+    <div class="cursor-position" id="cursorPosition">X: 0, Y: 0</div>
